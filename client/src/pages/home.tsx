@@ -45,10 +45,10 @@ export default function Home() {
       <section className="gradient-bg py-20 lg:py-28" data-testid="section-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6" data-testid="text-hero-title">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg" data-testid="text-hero-title">
               Buy & Sell Construction Materials
             </h1>
-            <p className="text-xl md:text-2xl text-white opacity-90 mb-12 max-w-3xl mx-auto" data-testid="text-hero-subtitle">
+            <p className="text-xl md:text-2xl text-white opacity-95 mb-12 max-w-3xl mx-auto drop-shadow-md" data-testid="text-hero-subtitle">
               Connect directly with material owners and seekers. Reduce waste, save money, and build sustainably.
             </p>
             
@@ -100,7 +100,7 @@ export default function Home() {
               <Button
                 onClick={handleSellMaterials}
                 variant="outline"
-                className="bg-white bg-opacity-20 text-white border-2 border-white hover:bg-white hover:text-foreground px-8 py-4 text-lg font-semibold"
+                className="bg-white bg-opacity-20 text-white border-2 border-white hover:bg-white hover:text-secondary backdrop-blur-sm px-8 py-4 text-lg font-semibold transition-all duration-300"
                 size="lg"
                 data-testid="button-sell-materials"
               >
