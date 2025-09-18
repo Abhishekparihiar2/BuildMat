@@ -1,10 +1,20 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useAuth } from "@/hooks/use-auth";
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuTrigger 
+} from "@/components/ui/dropdown-menu";
 
 export default function Header() {
   const [location] = useLocation();
-  const [currentUser, setCurrentUser] = useState(null); // TODO: Replace with actual auth state
+  const { user, logoutMutation } = useAuth();
+
+  const handleLogout = () => {
+    logoutMutation.mutate();
+  };
 
   return (
     <header className="bg-card border-b border-border sticky top-0 z-50" data-testid="header">
@@ -48,7 +58,7 @@ export default function Header() {
             </nav>
           </div>
           <div className="flex items-center space-x-4">
-            {currentUser ? (
+            {user ? (
               <>
                 <Link href="/dashboard" data-testid="link-dashboard">
                   <Button variant="ghost" size="sm">
@@ -64,6 +74,30 @@ export default function Header() {
                     List Material
                   </Button>
                 </Link>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="sm" data-testid="button-user-menu">
+                      <i className="fas fa-user mr-2"></i>
+                      {user.name}
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem asChild>
+                      <Link href="/dashboard" data-testid="menu-dashboard">
+                        <i className="fas fa-tachometer-alt mr-2"></i>
+                        Dashboard
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem 
+                      onClick={handleLogout}
+                      disabled={logoutMutation.isPending}
+                      data-testid="menu-logout"
+                    >
+                      <i className="fas fa-sign-out-alt mr-2"></i>
+                      {logoutMutation.isPending ? "Signing out..." : "Sign Out"}
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </>
             ) : (
               <>

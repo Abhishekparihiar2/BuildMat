@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useLocation, Link } from "wouter";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,15 +6,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
-import { loginSchema, LoginUser } from "@shared/schema";
+import { useAuth } from "@/hooks/use-auth";
+import { loginSchema } from "@shared/schema";
+import { z } from "zod";
+
+type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function Login() {
   const [, setLocation] = useLocation();
-  const { toast } = useToast();
+  const { user, loginMutation } = useAuth();
 
-  const form = useForm<LoginUser>({
+  // Redirect if already logged in
+  useEffect(() => {
+    if (user) {
+      setLocation("/dashboard");
+    }
+  }, [user, setLocation]);
+
+  const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
@@ -23,28 +31,12 @@ export default function Login() {
     },
   });
 
-  const loginMutation = useMutation({
-    mutationFn: async (data: LoginUser) => {
-      return await apiRequest("POST", "/api/auth/login", data);
-    },
-    onSuccess: () => {
-      toast({
-        title: "Welcome back!",
-        description: "You have been logged in successfully.",
-      });
-      setLocation("/dashboard");
-    },
-    onError: (error: any) => {
-      toast({
-        title: "Login Failed",
-        description: error.message || "Invalid email or password",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const onSubmit = (data: LoginUser) => {
-    loginMutation.mutate(data);
+  const onSubmit = (data: LoginFormData) => {
+    loginMutation.mutate(data, {
+      onSuccess: () => {
+        setLocation("/dashboard");
+      },
+    });
   };
 
   return (

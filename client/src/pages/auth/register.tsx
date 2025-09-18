@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useLocation, Link } from "wouter";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,13 +6,19 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
+import { useAuth } from "@/hooks/use-auth";
 import { insertUserSchema, InsertUser } from "@shared/schema";
 
 export default function Register() {
   const [, setLocation] = useLocation();
-  const { toast } = useToast();
+  const { user, registerMutation } = useAuth();
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (user) {
+      setLocation("/dashboard");
+    }
+  }, [user, setLocation]);
 
   const form = useForm<InsertUser>({
     resolver: zodResolver(insertUserSchema),
@@ -27,28 +32,12 @@ export default function Register() {
     },
   });
 
-  const registerMutation = useMutation({
-    mutationFn: async (data: InsertUser) => {
-      return await apiRequest("POST", "/api/auth/register", data);
-    },
-    onSuccess: () => {
-      toast({
-        title: "Account Created!",
-        description: "Your account has been created successfully. You can now sign in.",
-      });
-      setLocation("/login");
-    },
-    onError: (error: any) => {
-      toast({
-        title: "Registration Failed",
-        description: error.message || "An error occurred during registration",
-        variant: "destructive",
-      });
-    },
-  });
-
   const onSubmit = (data: InsertUser) => {
-    registerMutation.mutate(data);
+    registerMutation.mutate(data, {
+      onSuccess: () => {
+        setLocation("/dashboard");
+      },
+    });
   };
 
   return (
