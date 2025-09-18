@@ -1,0 +1,181 @@
+Scope of Work (SOW)
+
+Project: Construction Materials Marketplace (MVP)
+Objective: Develop a web-based platform for users to list construction materials they want to sell or dispose of, and for seekers to find and connect with sellers.
+
+1. Goals
+
+Provide a simple and intuitive platform for material listing and searching.
+
+Facilitate direct connection between sellers and buyers without complex intermediaries.
+
+Ensure MVP is minimal yet functional, focusing on core features before scaling.
+
+2. Target Users
+
+Material Owners (Sellers/Disposers):
+Users with construction materials (new, surplus, or used) they want to sell or give away.
+
+Material Seekers (Buyers):
+Users in need of construction materials who want to browse listings and contact owners.
+
+3. User Flow
+Material Owner (Seller)
+
+Register/Login →
+
+Add Material Listing (details, photos, contact) →
+
+Manage Listings (edit, delete, mark sold) →
+
+Respond to inquiries from seekers.
+
+Material Seeker (Buyer)
+
+Register/Login →
+
+Browse/Search Materials →
+
+Filter by category, location, or availability →
+
+View Material Details →
+
+Contact Owner →
+
+Complete transaction offline.
+
+4. Website Structure (MVP Pages & Sections)
+1. Landing Page
+
+Header (Logo, Navigation: Home, Browse Materials, Login/Register)
+
+Search Bar (Keyword, Category, Location)
+
+Featured Listings (Top or Recent)
+
+How It Works (brief explainer: "List → Browse → Connect")
+
+Call-to-Action buttons (List Material, Browse Materials)
+
+Footer (About, Contact, Terms & Privacy, Social Links)
+
+2. User Registration & Login
+
+Email/Phone-based signup + password
+
+Basic Profile creation (Name, Contact Info, Location)
+
+Login via Email/Password
+
+3. Dashboard (Post-Login Home)
+
+For Sellers:
+
+Add New Material Listing
+
+Manage My Listings (view, edit, delete, mark sold)
+
+Messages/Contact Requests
+
+For Buyers:
+
+Saved Searches/Materials
+
+Contacted Owners history
+
+Messages/Responses
+
+4. Browse Materials Page
+
+Search Bar (Keyword/Material Type)
+
+Filters (Category, Location, Condition: New/Used, Availability)
+
+Listing Cards (Thumbnail image, Title, Location, Quick Info, CTA: View Details)
+
+5. Material Detail Page
+
+Material Title
+
+Images Gallery
+
+Description (Quantity, Condition, Specs)
+
+Seller Info (Name, Contact button/form)
+
+Location Map/Address (optional)
+
+"Contact Owner" (simple inquiry form or reveal contact details)
+
+6. Add Listing Page (Seller Flow)
+
+Material Name
+
+Category (cement, steel, wood, etc.)
+
+Quantity/Units
+
+Condition (New/Used/Surplus)
+
+Price (or "Free/Dispose")
+
+Location
+
+Upload Photos
+
+Contact Preference (phone/email)
+
+Submit & Preview
+
+7. Contact/Message Page
+
+Buyer can send inquiry message to seller
+
+Seller receives inquiry in dashboard
+
+Option to share direct contact details
+
+8. About/Help/Policies
+
+About Us (mission statement)
+
+FAQ (listing process, transactions, disputes)
+
+Terms & Conditions
+
+Privacy Policy
+
+Contact Us Form
+
+5. Technology Scope (MVP)
+
+Frontend: Responsive web (HTML/CSS/JS, next.js for scalability)
+
+Backend: 
+Database: PostgreSQL / MySQL for user & listing management
+
+Hosting: Cloud-based (AWS, Azure, or similar)
+
+Authentication: Basic email/password auth (expandable to OAuth in future)
+
+6. Out of Scope (For MVP)
+
+Online payments (transactions handled offline)
+
+Ratings & Reviews system
+
+Mobile app (only responsive web for now)
+
+Advanced analytics/dashboard
+
+7. Success Criteria
+
+Users can register/login successfully.
+
+Sellers can create and manage listings.
+
+Buyers can browse, filter, and contact sellers.
+
+The website is mobile-friendly and simple to navigate.
+
+✅ This structure ensures the MVP is lean, but covers the essential workflows for both sellers and buyers.
