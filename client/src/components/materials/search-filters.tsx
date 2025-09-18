@@ -21,24 +21,24 @@ interface SearchFiltersProps {
 
 export default function SearchFilters({ onSearch, initialFilters = {} }: SearchFiltersProps) {
   const [query, setQuery] = useState(initialFilters.query || "");
-  const [category, setCategory] = useState(initialFilters.category || "");
+  const [category, setCategory] = useState(initialFilters.category || "all");
   const [location, setLocation] = useState(initialFilters.location || "");
-  const [condition, setCondition] = useState(initialFilters.condition || "");
+  const [condition, setCondition] = useState(initialFilters.condition || "any");
 
   const handleSearch = () => {
     onSearch({
       query: query || undefined,
-      category: category || undefined,
+      category: category && category !== "all" ? category : undefined,
       location: location || undefined,
-      condition: condition || undefined,
+      condition: condition && condition !== "any" ? condition : undefined,
     });
   };
 
   const handleClear = () => {
     setQuery("");
-    setCategory("");
+    setCategory("all");
     setLocation("");
-    setCondition("");
+    setCondition("any");
     onSearch({});
   };
 
@@ -62,7 +62,7 @@ export default function SearchFilters({ onSearch, initialFilters = {} }: SearchF
               <SelectValue placeholder="All Categories" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="" data-testid="option-all-categories">All Categories</SelectItem>
+              <SelectItem value="all" data-testid="option-all-categories">All Categories</SelectItem>
               {MATERIAL_CATEGORIES.map((cat) => (
                 <SelectItem key={cat.id} value={cat.id} data-testid={`option-category-${cat.id}`}>
                   {cat.name}
@@ -89,7 +89,7 @@ export default function SearchFilters({ onSearch, initialFilters = {} }: SearchF
               <SelectValue placeholder="Any Condition" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="" data-testid="option-any-condition">Any Condition</SelectItem>
+              <SelectItem value="any" data-testid="option-any-condition">Any Condition</SelectItem>
               {MATERIAL_CONDITIONS.map((cond) => (
                 <SelectItem key={cond.value} value={cond.value} data-testid={`option-condition-${cond.value}`}>
                   {cond.label}
