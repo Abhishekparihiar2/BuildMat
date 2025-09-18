@@ -109,7 +109,7 @@
 }
 
 .gradient-bg {
-  background: linear-gradient(135deg, hsl(215, 30%, 25%) 0%, hsl(var(--secondary)) 50%, hsl(var(--primary)) 100%);
+  background: linear-gradient(135deg, hsl(215, 30%, 25%) 0%, var(--secondary) 50%, var(--primary) 100%);
   position: relative;
 }
 
